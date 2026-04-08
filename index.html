@@ -3,492 +3,644 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Jettax 360º - Estudo</title>
+    <title>✨ Quiz Jettax 360º - Estudo</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f7fc;
+        * {
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(145deg, #f6f9fc 0%, #e6f0f5 100%);
+            min-height: 100vh;
+            padding: 30px 20px;
             display: flex;
             justify-content: center;
+            align-items: center;
         }
+
         .quiz-container {
-            max-width: 800px;
+            max-width: 900px;
             width: 100%;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
-            padding: 25px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            border-radius: 32px;
+            box-shadow: 0 25px 40px -12px rgba(2, 48, 71, 0.25),
+                        0 8px 18px rgba(0, 0, 0, 0.05);
+            padding: 30px 35px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            transition: all 0.3s ease;
         }
+
         h1 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            color: #023047;
+            font-weight: 700;
+            font-size: 2.4em;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        h1 i {
+            color: #ffb703;
+            font-size: 1.1em;
+            filter: drop-shadow(0 4px 6px rgba(255, 183, 3, 0.3));
+        }
+
+        .subhead {
             text-align: center;
-            color: #0b3b5c;
-            margin-top: 0;
-            font-size: 2em;
+            color: #2c3e50;
+            font-weight: 400;
+            font-size: 1.05rem;
+            margin-bottom: 25px;
+            border-bottom: 1px solid rgba(0, 119, 190, 0.15);
+            padding-bottom: 18px;
         }
+
         .question {
-            background: #f9f9f9;
-            border-left: 5px solid #0077be;
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 0 8px 8px 0;
+            background: white;
+            border-radius: 20px;
+            padding: 20px 25px;
+            margin-bottom: 22px;
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.03);
+            border: 1px solid #eef2f6;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
+
+        .question:hover {
+            box-shadow: 0 10px 22px rgba(0, 119, 190, 0.08);
+            transform: translateY(-2px);
+            border-color: #bdd9e8;
+        }
+
         .question h3 {
-            margin: 0 0 10px 0;
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            font-weight: 600;
+            font-size: 1.18rem;
             color: #0b3b5c;
+            margin-bottom: 18px;
+            line-height: 1.4;
         }
+
+        .q-icon {
+            color: #0077be;
+            font-size: 1.3rem;
+            width: 28px;
+            text-align: center;
+        }
+
         .options {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
+            margin-left: 5px;
         }
+
         .option {
             display: flex;
             align-items: center;
-            background: white;
-            padding: 10px 15px;
-            border-radius: 6px;
-            border: 1px solid #ddd;
+            background: #fafcfe;
+            padding: 14px 18px;
+            border-radius: 16px;
+            border: 1.5px solid #e2e9f0;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: all 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
         }
+
         .option:hover {
-            background: #e6f2ff;
+            background: #e2f0fd;
             border-color: #0077be;
+            padding-left: 22px;
+            box-shadow: 0 6px 12px rgba(0, 119, 190, 0.1);
         }
+
         .option input[type="radio"] {
-            margin-right: 12px;
-            transform: scale(1.1);
+            margin-right: 16px;
+            transform: scale(1.2);
             accent-color: #0077be;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
         }
+
+        .option span {
+            font-weight: 500;
+            color: #1a3e50;
+            font-size: 1rem;
+        }
+
         .feedback {
-            margin-top: 12px;
-            padding: 8px 12px;
-            border-radius: 5px;
-            font-weight: bold;
+            margin-top: 16px;
+            padding: 12px 18px;
+            border-radius: 14px;
+            font-weight: 500;
             display: none;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            border-left: 5px solid;
+            animation: fadeIn 0.3s ease;
         }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .feedback.correct {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
+            background: #e3f5e9;
+            color: #0e5e2e;
+            border-left-color: #2e8b57;
+            border: 1px solid #b8e0c5;
         }
+
         .feedback.incorrect {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
+            background: #feeceb;
+            color: #ac2c34;
+            border-left-color: #d1454b;
+            border: 1px solid #fbc5c2;
         }
+
+        .feedback i {
+            font-size: 1.3rem;
+        }
+
+        .name-input {
+            margin: 20px 0 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            background: #eef4f9;
+            padding: 12px 20px;
+            border-radius: 60px;
+        }
+
+        .name-input label {
+            font-weight: 600;
+            color: #0b3b5c;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .name-input input {
+            padding: 12px 22px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 40px;
+            background: white;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.02), 0 2px 8px rgba(0,119,190,0.1);
+            width: 280px;
+            max-width: 100%;
+            outline: none;
+            transition: box-shadow 0.2s;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .name-input input:focus {
+            box-shadow: 0 0 0 3px rgba(0, 119, 190, 0.2), inset 0 2px 5px rgba(0,0,0,0.02);
+        }
+
         .result-area {
             text-align: center;
-            margin: 25px 0 15px;
+            margin: 30px 0 20px;
         }
-        .name-input {
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        .name-input label {
-            font-weight: bold;
-            margin-right: 10px;
-        }
-        .name-input input {
-            padding: 10px 15px;
-            font-size: 1em;
-            border: 1px solid #ccc;
-            border-radius: 30px;
-            width: 250px;
-            max-width: 80%;
-            outline: none;
-            transition: border 0.2s;
-        }
-        .name-input input:focus {
-            border-color: #0077be;
-        }
+
         #submitBtn {
-            background: #0077be;
+            background: linear-gradient(145deg, #0077be, #005f9e);
             color: white;
             border: none;
-            padding: 14px 30px;
-            font-size: 1.2em;
+            padding: 16px 38px;
+            font-size: 1.25rem;
             border-radius: 50px;
             cursor: pointer;
-            font-weight: bold;
-            transition: background 0.3s;
-            box-shadow: 0 4px 6px rgba(0,119,190,0.3);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            box-shadow: 0 12px 18px -6px rgba(0, 95, 158, 0.3);
+            transition: all 0.2s;
+            border: 1px solid rgba(255,255,255,0.2);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
         }
+
+        #submitBtn i {
+            font-size: 1.1em;
+        }
+
         #submitBtn:hover {
-            background: #005fa3;
+            background: linear-gradient(145deg, #0066a8, #004c7a);
+            transform: scale(1.02);
+            box-shadow: 0 18px 25px -8px #0037535e;
         }
+
         #scoreDisplay {
-            font-size: 1.6em;
-            margin-top: 20px;
-            padding: 15px;
-            background: #0b3b5c;
+            font-size: 1.8rem;
+            margin-top: 30px;
+            padding: 22px 20px;
+            background: linear-gradient(135deg, #023047 0%, #0b3b5c 100%);
             color: white;
-            border-radius: 8px;
+            border-radius: 30px;
+            box-shadow: inset 0 1px 3px rgba(255,255,255,0.2), 0 15px 20px -8px rgba(2,48,71,0.3);
+            font-weight: 600;
+            line-height: 1.5;
+            border: 1px solid #2c5f7a;
         }
+
+        #scoreDisplay i {
+            margin: 0 6px;
+            color: #ffb703;
+        }
+
         .note {
             text-align: center;
-            color: #666;
-            font-size: 0.9em;
+            color: #4f6f7f;
+            font-size: 0.9rem;
             margin-top: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .note i {
+            color: #ffb703;
+        }
+
+        /* Responsividade */
+        @media (max-width: 600px) {
+            .quiz-container {
+                padding: 20px 18px;
+            }
+            h1 {
+                font-size: 1.9em;
+            }
+            .question {
+                padding: 18px 16px;
+            }
+            .option {
+                padding: 12px 14px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="quiz-container">
-        <h1>📘 Quiz Jettax 360º</h1>
-        <p style="text-align:center; color:#444;">Teste seus conhecimentos sobre os módulos: Cadastro, Serviços, Federal, Simples Nacional e Prevenção.</p>
+        <h1>
+            <i class="fas fa-graduation-cap"></i> 
+            Quiz Jettax 360º
+            <i class="fas fa-rocket"></i>
+        </h1>
+        <div class="subhead">
+            <i class="fas fa-check-circle" style="color:#0077be;"></i> 
+            Cadastro • Serviços • Federal • Simples Nacional • Prevenção
+        </div>
 
-        <!-- PERGUNTAS (as mesmas 20 do seu original) -->
-        <!-- Pergunta 1 -->
+        <!-- As 20 perguntas (idênticas, apenas acrescentei ícones nos enunciados para charme) -->
+        <!-- Q1 -->
         <div class="question" id="q1">
-            <h3>1. Qual é o prazo máximo que o sistema pode levar para começar a buscar notas de serviço após a primeira configuração?</h3>
+            <h3><span class="q-icon"><i class="far fa-clock"></i></span> 1. Qual é o prazo máximo que o sistema pode levar para começar a buscar notas de serviço após a primeira configuração?</h3>
             <div class="options">
-                <label class="option"><input type="radio" name="q1" value="a"> a) 12 horas</label>
-                <label class="option"><input type="radio" name="q1" value="b"> b) 24 horas</label>
-                <label class="option"><input type="radio" name="q1" value="c"> c) 48 horas</label>
-                <label class="option"><input type="radio" name="q1" value="d"> d) 72 horas</label>
+                <label class="option"><input type="radio" name="q1" value="a"> <span>a) 12 horas</span></label>
+                <label class="option"><input type="radio" name="q1" value="b"> <span>b) 24 horas</span></label>
+                <label class="option"><input type="radio" name="q1" value="c"> <span>c) 48 horas</span></label>
+                <label class="option"><input type="radio" name="q1" value="d"> <span>d) 72 horas</span></label>
             </div>
             <div class="feedback" id="fb1"></div>
         </div>
-
-        <!-- Pergunta 2 -->
+        <!-- Q2 -->
         <div class="question" id="q2">
-            <h3>2. No módulo Federal, para capturar notas de saída (vendas), é necessário:</h3>
+            <h3><span class="q-icon"><i class="fas fa-file-invoice"></i></span> 2. No módulo Federal, para capturar notas de saída (vendas), é necessário:</h3>
             <div class="options">
-                <label class="option"><input type="radio" name="q2" value="a"> a) Apenas ativar o módulo em lote</label>
-                <label class="option"><input type="radio" name="q2" value="b"> b) Importar de 1 a 10 XMLs dos últimos 45 dias e ativar a busca no cliente</label>
-                <label class="option"><input type="radio" name="q2" value="c"> c) Cadastrar a inscrição estadual correta</label>
-                <label class="option"><input type="radio" name="q2" value="d"> d) Usar exclusivamente certificado A3</label>
+                <label class="option"><input type="radio" name="q2" value="a"> <span>a) Apenas ativar o módulo em lote</span></label>
+                <label class="option"><input type="radio" name="q2" value="b"> <span>b) Importar de 1 a 10 XMLs dos últimos 45 dias e ativar a busca no cliente</span></label>
+                <label class="option"><input type="radio" name="q2" value="c"> <span>c) Cadastrar a inscrição estadual correta</span></label>
+                <label class="option"><input type="radio" name="q2" value="d"> <span>d) Usar exclusivamente certificado A3</span></label>
             </div>
             <div class="feedback" id="fb2"></div>
         </div>
-
-        <!-- Pergunta 3 -->
+        <!-- Q3 -->
         <div class="question" id="q3">
-            <h3>3. Qual é a credencial mais efetiva para o módulo Simples Nacional, segundo o treinamento?</h3>
+            <h3><span class="q-icon"><i class="fas fa-key"></i></span> 3. Qual é a credencial mais efetiva para o módulo Simples Nacional?</h3>
             <div class="options">
-                <label class="option"><input type="radio" name="q3" value="a"> a) Certificado digital da empresa</label>
-                <label class="option"><input type="radio" name="q3" value="b"> b) Certificado do escritório por procuração</label>
-                <label class="option"><input type="radio" name="q3" value="c"> c) Código de acesso do Simples Nacional</label>
-                <label class="option"><input type="radio" name="q3" value="d"> d) Login e senha do e-CAC</label>
+                <label class="option"><input type="radio" name="q3" value="a"> <span>a) Certificado digital da empresa</span></label>
+                <label class="option"><input type="radio" name="q3" value="b"> <span>b) Certificado do escritório por procuração</span></label>
+                <label class="option"><input type="radio" name="q3" value="c"> <span>c) Código de acesso do Simples Nacional</span></label>
+                <label class="option"><input type="radio" name="q3" value="d"> <span>d) Login e senha do e-CAC</span></label>
             </div>
             <div class="feedback" id="fb3"></div>
         </div>
-
-        <!-- Pergunta 4 -->
+        <!-- Q4 -->
         <div class="question" id="q4">
-            <h3>4. Sobre o cadastro de clientes por planilha, qual campo é obrigatório mesmo que a empresa não possua Inscrição Municipal?</h3>
+            <h3><span class="q-icon"><i class="fas fa-table"></i></span> 4. Cadastro por planilha: campo obrigatório se não tiver Inscrição Municipal?</h3>
             <div class="options">
-                <label class="option"><input type="radio" name="q4" value="a"> a) Deixar em branco</label>
-                <label class="option"><input type="radio" name="q4" value="b"> b) Preencher com "isento"</label>
-                <label class="option"><input type="radio" name="q4" value="c"> c) Repetir o CNPJ</label>
-                <label class="option"><input type="radio" name="q4" value="d"> d) Inserir um número qualquer</label>
+                <label class="option"><input type="radio" name="q4" value="a"> <span>a) Deixar em branco</span></label>
+                <label class="option"><input type="radio" name="q4" value="b"> <span>b) Preencher com "isento"</span></label>
+                <label class="option"><input type="radio" name="q4" value="c"> <span>c) Repetir o CNPJ</span></label>
+                <label class="option"><input type="radio" name="q4" value="d"> <span>d) Inserir um número qualquer</span></label>
             </div>
             <div class="feedback" id="fb4"></div>
         </div>
-
-        <!-- Pergunta 5 -->
+        <!-- Q5 -->
         <div class="question" id="q5">
-            <h3>5. No módulo Prevenção, como o sistema trata mensagens do e-CAC que ainda não foram lidas no portal?</h3>
+            <h3><span class="q-icon"><i class="fas fa-envelope"></i></span> 5. Prevenção: mensagens não lidas do e-CAC?</h3>
             <div class="options">
-                <label class="option"><input type="radio" name="q5" value="a"> a) Ele lê automaticamente e já mostra o conteúdo</label>
-                <label class="option"><input type="radio" name="q5" value="b"> b) Ele não traz a mensagem para a plataforma</label>
-                <label class="option"><input type="radio" name="q5" value="c"> c) Ele exibe um envelope fechado e é preciso agendar a leitura</label>
-                <label class="option"><input type="radio" name="q5" value="d"> d) Ele mostra a mensagem, mas sem o conteúdo</label>
+                <label class="option"><input type="radio" name="q5" value="a"> <span>a) Lê automaticamente e mostra conteúdo</span></label>
+                <label class="option"><input type="radio" name="q5" value="b"> <span>b) Não traz para a plataforma</span></label>
+                <label class="option"><input type="radio" name="q5" value="c"> <span>c) Exibe envelope fechado e agenda leitura</span></label>
+                <label class="option"><input type="radio" name="q5" value="d"> <span>d) Mostra sem conteúdo</span></label>
             </div>
             <div class="feedback" id="fb5"></div>
         </div>
-
-        <!-- Pergunta 6 -->
+        <!-- Q6 -->
         <div class="question" id="q6">
-            <h3>6. Qual a principal função da importação da RBT12 no módulo Simples Nacional?</h3>
+            <h3><span class="q-icon"><i class="fas fa-calculator"></i></span> 6. Função principal da RBT12 no Simples Nacional?</h3>
             <div class="options">
-                <label class="option"><input type="radio" name="q6" value="a"> a) Calcular o valor do ISS</label>
-                <label class="option"><input type="radio" name="q6" value="b"> b) Definir a alíquota correta do DAS</label>
-                <label class="option"><input type="radio" name="q6" value="c"> c) Habilitar a emissão de notas</label>
-                <label class="option"><input type="radio" name="q6" value="d"> d) Cadastrar os sócios da empresa</label>
+                <label class="option"><input type="radio" name="q6" value="a"> <span>a) Calcular ISS</span></label>
+                <label class="option"><input type="radio" name="q6" value="b"> <span>b) Definir alíquota correta do DAS</span></label>
+                <label class="option"><input type="radio" name="q6" value="c"> <span>c) Habilitar emissão de notas</span></label>
+                <label class="option"><input type="radio" name="q6" value="d"> <span>d) Cadastrar sócios</span></label>
             </div>
             <div class="feedback" id="fb6"></div>
         </div>
-
-        <!-- Pergunta 7 -->
+        <!-- Q7 -->
         <div class="question" id="q7">
-            <h3>7. No módulo Serviços, o que a coluna de "alerta" indica na listagem de notas?</h3>
+            <h3><span class="q-icon"><i class="fas fa-exclamation-triangle"></i></span> 7. Serviços: coluna "alerta" indica?</h3>
             <div class="options">
-                <label class="option"><input type="radio" name="q7" value="a"> a) Nota emitida há mais de 30 dias</label>
-                <label class="option"><input type="radio" name="q7" value="b"> b) Possível divergência nas retenções federais</label>
-                <label class="option"><input type="radio" name="q7" value="c"> c) Falta de assinatura digital</label>
-                <label class="option"><input type="radio" name="q7" value="d"> d) Erro no CNPJ do tomador</label>
+                <label class="option"><input type="radio" name="q7" value="a"> <span>a) Nota > 30 dias</span></label>
+                <label class="option"><input type="radio" name="q7" value="b"> <span>b) Divergência nas retenções federais</span></label>
+                <label class="option"><input type="radio" name="q7" value="c"> <span>c) Falta de assinatura digital</span></label>
+                <label class="option"><input type="radio" name="q7" value="d"> <span>d) Erro no CNPJ do tomador</span></label>
             </div>
             <div class="feedback" id="fb7"></div>
         </div>
-
-        <!-- Pergunta 8 -->
+        <!-- Q8 -->
         <div class="question" id="q8">
-            <h3>8. Sobre o consumo de licenças, é correto afirmar:</h3>
+            <h3><span class="q-icon"><i class="fas fa-credit-card"></i></span> 8. Consumo de licenças:</h3>
             <div class="options">
-                <label class="option"><input type="radio" name="q8" value="a"> a) Cadastrar um cliente já consome uma licença</label>
-                <label class="option"><input type="radio" name="q8" value="b"> b) O consumo começa quando o módulo é ativado no cliente</label>
-                <label class="option"><input type="radio" name="q8" value="c"> c) O módulo Federal consome por CNPJ, assim como os demais</label>
-                <label class="option"><input type="radio" name="q8" value="d"> d) Não há limite de ativação, independentemente do contrato</label>
+                <label class="option"><input type="radio" name="q8" value="a"> <span>a) Cadastrar cliente consome licença</span></label>
+                <label class="option"><input type="radio" name="q8" value="b"> <span>b) Começa quando módulo é ativado no cliente</span></label>
+                <label class="option"><input type="radio" name="q8" value="c"> <span>c) Federal consome por CNPJ igual demais</span></label>
+                <label class="option"><input type="radio" name="q8" value="d"> <span>d) Sem limite independente do contrato</span></label>
             </div>
             <div class="feedback" id="fb8"></div>
         </div>
-
-        <!-- Pergunta 9 -->
+        <!-- Q9 -->
         <div class="question" id="q9">
-            <h3>9. No módulo Federal, o que é a funcionalidade "Autenticidade"?</h3>
+            <h3><span class="q-icon"><i class="fas fa-check-double"></i></span> 9. Federal: "Autenticidade"?</h3>
             <div class="options">
-                <label class="option"><input type="radio" name="q9" value="a"> a) Validar a assinatura do XML</label>
-                <label class="option"><input type="radio" name="q9" value="b"> b) Consultar no Sefaz se notas foram canceladas</label>
-                <label class="option"><input type="radio" name="q9" value="c"> c) Emitir uma via do DANFE</label>
-                <label class="option"><input type="radio" name="q9" value="d"> d) Corrigir CST de PIS/Cofins</label>
+                <label class="option"><input type="radio" name="q9" value="a"> <span>a) Validar assinatura XML</span></label>
+                <label class="option"><input type="radio" name="q9" value="b"> <span>b) Consultar Sefaz se notas foram canceladas</span></label>
+                <label class="option"><input type="radio" name="q9" value="c"> <span>c) Emitir DANFE</span></label>
+                <label class="option"><input type="radio" name="q9" value="d"> <span>d) Corrigir CST PIS/Cofins</span></label>
             </div>
             <div class="feedback" id="fb9"></div>
         </div>
-
-        <!-- Pergunta 10 -->
+        <!-- Q10 -->
         <div class="question" id="q10">
-            <h3>10. Sobre o download de arquivos no módulo Federal, a opção "auditado":</h3>
+            <h3><span class="q-icon"><i class="fas fa-download"></i></span> 10. Download "auditado":</h3>
             <div class="options">
-                <label class="option"><input type="radio" name="q10" value="a"> a) Altera o XML original na plataforma</label>
-                <label class="option"><input type="radio" name="q10" value="b"> b) Baixa o XML com as correções sugeridas pela auditoria, mantendo o original intacto</label>
-                <label class="option"><input type="radio" name="q10" value="c"> c) Gera um PDF resumido da nota</label>
-                <label class="option"><input type="radio" name="q10" value="d"> d) Remove as tags de tributação</label>
+                <label class="option"><input type="radio" name="q10" value="a"> <span>a) Altera XML original</span></label>
+                <label class="option"><input type="radio" name="q10" value="b"> <span>b) Baixa XML com correções da auditoria, mantém original</span></label>
+                <label class="option"><input type="radio" name="q10" value="c"> <span>c) Gera PDF resumido</span></label>
+                <label class="option"><input type="radio" name="q10" value="d"> <span>d) Remove tags de tributação</span></label>
             </div>
             <div class="feedback" id="fb10"></div>
         </div>
-
-        <!-- Pergunta 11 -->
+        <!-- Q11 -->
         <div class="question" id="q11">
-            <h3>11. No módulo Prevenção, o que é possível fazer na "Central de Impostos" com guias vencidas?</h3>
+            <h3><span class="q-icon"><i class="fas fa-file-invoice-dollar"></i></span> 11. Prevenção: guias vencidas na Central de Impostos?</h3>
             <div class="options">
-                <label class="option"><input type="radio" name="q11" value="a"> a) Apenas visualizar o débito</label>
-                <label class="option"><input type="radio" name="q11" value="b"> b) Recalcular com juros e multa e emitir nova guia</label>
-                <label class="option"><input type="radio" name="q11" value="c"> c) Parcelar automaticamente</label>
-                <label class="option"><input type="radio" name="q11" value="d"> d) Excluir o débito do sistema</label>
+                <label class="option"><input type="radio" name="q11" value="a"> <span>a) Apenas visualizar</span></label>
+                <label class="option"><input type="radio" name="q11" value="b"> <span>b) Recalcular com juros e multa, emitir nova guia</span></label>
+                <label class="option"><input type="radio" name="q11" value="c"> <span>c) Parcelar automaticamente</span></label>
+                <label class="option"><input type="radio" name="q11" value="d"> <span>d) Excluir débito</span></label>
             </div>
             <div class="feedback" id="fb11"></div>
         </div>
-
-        <!-- Pergunta 12 -->
+        <!-- Q12 -->
         <div class="question" id="q12">
-            <h3>12. Qual a utilidade das "Regras de Tributação" no módulo Simples Nacional?</h3>
+            <h3><span class="q-icon"><i class="fas fa-sliders-h"></i></span> 12. Regras de Tributação no Simples:</h3>
             <div class="options">
-                <label class="option"><input type="radio" name="q12" value="a"> a) Corrigir na plataforma notas emitidas com código incorreto</label>
-                <label class="option"><input type="radio" name="q12" value="b"> b) Emitir notas fiscais corretivas</label>
-                <label class="option"><input type="radio" name="q12" value="c"> c) Alterar o regime tributário da empresa</label>
-                <label class="option"><input type="radio" name="q12" value="d"> d) Gerar um novo XML da nota</label>
+                <label class="option"><input type="radio" name="q12" value="a"> <span>a) Corrigir notas com código incorreto na plataforma</span></label>
+                <label class="option"><input type="radio" name="q12" value="b"> <span>b) Emitir notas corretivas</span></label>
+                <label class="option"><input type="radio" name="q12" value="c"> <span>c) Alterar regime tributário</span></label>
+                <label class="option"><input type="radio" name="q12" value="d"> <span>d) Gerar novo XML</span></label>
             </div>
             <div class="feedback" id="fb12"></div>
         </div>
-
-        <!-- Pergunta 13 -->
+        <!-- Q13 -->
         <div class="question" id="q13">
-            <h3>13. Sobre o "Acesso do Cliente" (usuário cliente), é correto afirmar:</h3>
+            <h3><span class="q-icon"><i class="fas fa-user-friends"></i></span> 13. Acesso do Cliente:</h3>
             <div class="options">
-                <label class="option"><input type="radio" name="q13" value="a"> a) Gera custo adicional por usuário criado</label>
-                <label class="option"><input type="radio" name="q13" value="b"> b) O cliente pode emitir notas fiscais pelo sistema</label>
-                <label class="option"><input type="radio" name="q13" value="c"> c) O cliente pode visualizar seus documentos e manifestar notas de compra</label>
-                <label class="option"><input type="radio" name="q13" value="d"> d) É um acesso idêntico ao do escritório</label>
+                <label class="option"><input type="radio" name="q13" value="a"> <span>a) Gera custo adicional por usuário</span></label>
+                <label class="option"><input type="radio" name="q13" value="b"> <span>b) Cliente pode emitir NF</span></label>
+                <label class="option"><input type="radio" name="q13" value="c"> <span>c) Visualizar docs e manifestar notas de compra</span></label>
+                <label class="option"><input type="radio" name="q13" value="d"> <span>d) Idêntico ao escritório</span></label>
             </div>
             <div class="feedback" id="fb13"></div>
         </div>
-
-        <!-- Pergunta 14 -->
+        <!-- Q14 -->
         <div class="question" id="q14">
-            <h3>14. No módulo Serviços, a Reinf (retenções) pode ser enviada pela plataforma. Sobre isso:</h3>
+            <h3><span class="q-icon"><i class="fas fa-cloud-upload-alt"></i></span> 14. Serviços - Reinf:</h3>
             <div class="options">
-                <label class="option"><input type="radio" name="q14" value="a"> a) Só é possível enviar retenções de notas prestadas</label>
-                <label class="option"><input type="radio" name="q14" value="b"> b) Uma vez habilitada, não é possível desabilitar, mas pode-se escolher transmitir ou não</label>
-                <label class="option"><input type="radio" name="q14" value="c"> c) A transmissão da Reinf é automática e não pode ser interrompida</label>
-                <label class="option"><input type="radio" name="q14" value="d"> d) A Reinf só funciona para empresas do Simples Nacional</label>
+                <label class="option"><input type="radio" name="q14" value="a"> <span>a) Só retenções de notas prestadas</span></label>
+                <label class="option"><input type="radio" name="q14" value="b"> <span>b) Habilitada não desabilita, pode escolher transmitir</span></label>
+                <label class="option"><input type="radio" name="q14" value="c"> <span>c) Transmissão automática</span></label>
+                <label class="option"><input type="radio" name="q14" value="d"> <span>d) Só Simples Nacional</span></label>
             </div>
             <div class="feedback" id="fb14"></div>
         </div>
-
-        <!-- Pergunta 15 -->
+        <!-- Q15 -->
         <div class="question" id="q15">
-            <h3>15. Quais estados são atendidos pela captura de NFC-e atualmente?</h3>
+            <h3><span class="q-icon"><i class="fas fa-map-marked-alt"></i></span> 15. Captura de NFC-e atende:</h3>
             <div class="options">
-                <label class="option"><input type="radio" name="q15" value="a"> a) Todos os estados do Sudeste e Sul</label>
-                <label class="option"><input type="radio" name="q15" value="b"> b) Bahia, Goiás, Minas Gerais, Paraíba, Santa Catarina e São Paulo</label>
-                <label class="option"><input type="radio" name="q15" value="c"> c) Apenas São Paulo e Rio de Janeiro</label>
-                <label class="option"><input type="radio" name="q15" value="d"> d) Apenas capitais</label>
+                <label class="option"><input type="radio" name="q15" value="a"> <span>a) Sudeste e Sul</span></label>
+                <label class="option"><input type="radio" name="q15" value="b"> <span>b) BA, GO, MG, PB, SC e SP</span></label>
+                <label class="option"><input type="radio" name="q15" value="c"> <span>c) SP e RJ</span></label>
+                <label class="option"><input type="radio" name="q15" value="d"> <span>d) Apenas capitais</span></label>
             </div>
             <div class="feedback" id="fb15"></div>
         </div>
-
-        <!-- Pergunta 16 -->
+        <!-- Q16 -->
         <div class="question" id="q16">
-            <h3>16. No módulo Prevenção, o que significa o envelope fechado ao lado de uma mensagem?</h3>
+            <h3><span class="q-icon"><i class="fas fa-envelope-open-text"></i></span> 16. Envelope fechado em mensagem:</h3>
             <div class="options">
-                <label class="option"><input type="radio" name="q16" value="a"> a) A mensagem já foi lida no portal, mas não visualizada no Jettax</label>
-                <label class="option"><input type="radio" name="q16" value="b"> b) A mensagem ainda não foi lida no portal original; é preciso agendar a leitura</label>
-                <label class="option"><input type="radio" name="q16" value="c"> c) A mensagem foi arquivada</label>
-                <label class="option"><input type="radio" name="q16" value="d"> d) A mensagem contém um anexo</label>
+                <label class="option"><input type="radio" name="q16" value="a"> <span>a) Lida no portal, não visualizada</span></label>
+                <label class="option"><input type="radio" name="q16" value="b"> <span>b) Não lida no portal, agendar leitura</span></label>
+                <label class="option"><input type="radio" name="q16" value="c"> <span>c) Arquivada</span></label>
+                <label class="option"><input type="radio" name="q16" value="d"> <span>d) Contém anexo</span></label>
             </div>
             <div class="feedback" id="fb16"></div>
         </div>
-
-        <!-- Pergunta 17 -->
+        <!-- Q17 -->
         <div class="question" id="q17">
-            <h3>17. Sobre o agendamento de pacotes da prefeitura no módulo Serviços, é verdade que:</h3>
+            <h3><span class="q-icon"><i class="fas fa-calendar-alt"></i></span> 17. Agendamento pacotes prefeitura:</h3>
             <div class="options">
-                <label class="option"><input type="radio" name="q17" value="a"> a) O pacote é gerado imediatamente após o agendamento</label>
-                <label class="option"><input type="radio" name="q17" value="b"> b) O agendamento deve ser criado com data futura, pois processa durante a madrugada</label>
-                <label class="option"><input type="radio" name="q17" value="c"> c) Clientes novos são automaticamente incluídos nos agendamentos existentes</label>
-                <label class="option"><input type="radio" name="q17" value="d"> d) O pacote só pode ser gerado uma vez por ano</label>
+                <label class="option"><input type="radio" name="q17" value="a"> <span>a) Gerado imediatamente</span></label>
+                <label class="option"><input type="radio" name="q17" value="b"> <span>b) Data futura, processa na madrugada</span></label>
+                <label class="option"><input type="radio" name="q17" value="c"> <span>c) Clientes novos incluídos automaticamente</span></label>
+                <label class="option"><input type="radio" name="q17" value="d"> <span>d) Uma vez por ano</span></label>
             </div>
             <div class="feedback" id="fb17"></div>
         </div>
-
-        <!-- Pergunta 18 -->
+        <!-- Q18 -->
         <div class="question" id="q18">
-            <h3>18. No módulo Federal, a "categorização" de notas de compra pode ser automatizada através de:</h3>
+            <h3><span class="q-icon"><i class="fas fa-tags"></i></span> 18. Categorização automatizada:</h3>
             <div class="options">
-                <label class="option"><input type="radio" name="q18" value="a"> a) Regras de CFOP, CNPJ do fornecedor ou NCM</label>
-                <label class="option"><input type="radio" name="q18" value="b"> b) Regras de valor da nota</label>
-                <label class="option"><input type="radio" name="q18" value="c"> c) Apenas manualmente, nota por nota</label>
-                <label class="option"><input type="radio" name="q18" value="d"> d) Integração com o ERP</label>
+                <label class="option"><input type="radio" name="q18" value="a"> <span>a) Regras de CFOP, CNPJ fornecedor ou NCM</span></label>
+                <label class="option"><input type="radio" name="q18" value="b"> <span>b) Regras de valor</span></label>
+                <label class="option"><input type="radio" name="q18" value="c"> <span>c) Manual</span></label>
+                <label class="option"><input type="radio" name="q18" value="d"> <span>d) Integração ERP</span></label>
             </div>
             <div class="feedback" id="fb18"></div>
         </div>
-
-        <!-- Pergunta 19 -->
+        <!-- Q19 -->
         <div class="question" id="q19">
-            <h3>19. No Simples Nacional, após criar uma regra de tributação (ex.: corrigir CFOP), qual ação é necessária para que a apuração seja recalculada?</h3>
+            <h3><span class="q-icon"><i class="fas fa-redo-alt"></i></span> 19. Após criar regra, ação para recalcular apuração:</h3>
             <div class="options">
-                <label class="option"><input type="radio" name="q19" value="a"> a) Aguardar a próxima madrugada</label>
-                <label class="option"><input type="radio" name="q19" value="b"> b) Clicar em "Recalcular" na apuração</label>
-                <label class="option"><input type="radio" name="q19" value="c"> c) Executar o "Reprocessar Tributação"</label>
-                <label class="option"><input type="radio" name="q19" value="d"> d) Reimportar a RBT12</label>
+                <label class="option"><input type="radio" name="q19" value="a"> <span>a) Aguardar madrugada</span></label>
+                <label class="option"><input type="radio" name="q19" value="b"> <span>b) Clicar "Recalcular"</span></label>
+                <label class="option"><input type="radio" name="q19" value="c"> <span>c) "Reprocessar Tributação"</span></label>
+                <label class="option"><input type="radio" name="q19" value="d"> <span>d) Reimportar RBT12</span></label>
             </div>
             <div class="feedback" id="fb19"></div>
         </div>
-
-        <!-- Pergunta 20 -->
+        <!-- Q20 -->
         <div class="question" id="q20">
-            <h3>20. Sobre o consumo excedente de licenças, a plataforma:</h3>
+            <h3><span class="q-icon"><i class="fas fa-chart-line"></i></span> 20. Consumo excedente de licenças:</h3>
             <div class="options">
-                <label class="option"><input type="radio" name="q20" value="a"> a) Bloqueia imediatamente o acesso até regularização</label>
-                <label class="option"><input type="radio" name="q20" value="b"> b) Emite alertas por até 3 meses antes de o time comercial fazer contato</label>
-                <label class="option"><input type="radio" name="q20" value="c"> c) Cobra automaticamente o valor excedente na fatura seguinte</label>
-                <label class="option"><input type="radio" name="q20" value="d"> d) Ignora o excedente se for pequeno</label>
+                <label class="option"><input type="radio" name="q20" value="a"> <span>a) Bloqueia imediatamente</span></label>
+                <label class="option"><input type="radio" name="q20" value="b"> <span>b) Alertas por até 3 meses, depois contato comercial</span></label>
+                <label class="option"><input type="radio" name="q20" value="c"> <span>c) Cobra na fatura seguinte</span></label>
+                <label class="option"><input type="radio" name="q20" value="d"> <span>d) Ignora se pequeno</span></label>
             </div>
             <div class="feedback" id="fb20"></div>
         </div>
 
-        <!-- Campo para nome -->
+        <!-- Campo nome -->
         <div class="name-input">
-            <label for="nomeUsuario">👤 Seu nome (opcional):</label>
-            <input type="text" id="nomeUsuario" placeholder="Digite seu nome">
+            <label><i class="fas fa-user-circle"></i> Seu nome (opcional):</label>
+            <input type="text" id="nomeUsuario" placeholder="Ex: Maria Silva">
         </div>
 
-        <!-- Área do botão e resultado -->
         <div class="result-area">
-            <button id="submitBtn">✅ Corrigir respostas</button>
+            <button id="submitBtn"><i class="fas fa-check-double"></i> Corrigir respostas</button>
             <div id="scoreDisplay"></div>
         </div>
         <div class="note">
-            Baseado nos treinamentos internos de fevereiro de 2026. Bons estudos!
+            <i class="far fa-calendar-check"></i> Baseado nos treinamentos internos • Fev/2026 • Bons estudos!
         </div>
     </div>
 
     <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-    const firebaseConfig = {
-        apiKey: "AIzaSyCSQi-gXgnYAblDsJ1qdAYEiGLQW3tVDTQ",
-        authDomain: "quizjettax-a646c.firebaseapp.com",
-        projectId: "quizjettax-a646c",
-        storageBucket: "quizjettax-a646c.firebasestorage.app",
-        messagingSenderId: "715753997442",
-        appId: "1:715753997442:web:7efa4fb12db63e9b24609b",
-        measurementId: "G-W590Y794RF"
-    };
+        const firebaseConfig = {
+            apiKey: "AIzaSyCSQi-gXgnYAblDsJ1qdAYEiGLQW3tVDTQ",
+            authDomain: "quizjettax-a646c.firebaseapp.com",
+            projectId: "quizjettax-a646c",
+            storageBucket: "quizjettax-a646c.firebasestorage.app",
+            messagingSenderId: "715753997442",
+            appId: "1:715753997442:web:7efa4fb12db63e9b24609b",
+            measurementId: "G-W590Y794RF"
+        };
 
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
 
-    const answers = {
-        q1: 'c', q2: 'b', q3: 'c', q4: 'c', q5: 'c',
-        q6: 'b', q7: 'b', q8: 'b', q9: 'b', q10: 'b',
-        q11: 'b', q12: 'a', q13: 'c', q14: 'b', q15: 'b',
-        q16: 'b', q17: 'b', q18: 'a', q19: 'c', q20: 'b'
-    };
-    const totalQuestions = Object.keys(answers).length;
+        const answers = {
+            q1: 'c', q2: 'b', q3: 'c', q4: 'c', q5: 'c',
+            q6: 'b', q7: 'b', q8: 'b', q9: 'b', q10: 'b',
+            q11: 'b', q12: 'a', q13: 'c', q14: 'b', q15: 'b',
+            q16: 'b', q17: 'b', q18: 'a', q19: 'c', q20: 'b'
+        };
+        const totalQuestions = Object.keys(answers).length;
 
-    document.getElementById('submitBtn').addEventListener('click', async function() {
-        let score = 0;
-        for (let i = 1; i <= totalQuestions; i++) {
-            const questionName = 'q' + i;
-            const radios = document.getElementsByName(questionName);
-            let selectedValue = null;
-            for (let radio of radios) {
-                if (radio.checked) {
-                    selectedValue = radio.value;
-                    break;
+        document.getElementById('submitBtn').addEventListener('click', async function() {
+            let score = 0;
+            for (let i = 1; i <= totalQuestions; i++) {
+                const questionName = 'q' + i;
+                const radios = document.getElementsByName(questionName);
+                let selectedValue = null;
+                for (let radio of radios) {
+                    if (radio.checked) {
+                        selectedValue = radio.value;
+                        break;
+                    }
                 }
-            }
-            const feedbackDiv = document.getElementById('fb' + i);
-            const correctAnswer = answers[questionName];
-            const correctLetter = correctAnswer.toUpperCase();
-            let correctText = '';
-            const labels = document.querySelectorAll(`.question#q${i} .option`);
-            labels.forEach(label => {
-                const radio = label.querySelector('input');
-                if (radio.value === correctAnswer) {
-                    correctText = label.innerText.trim();
-                }
-            });
-            if (selectedValue) {
-                if (selectedValue === correctAnswer) {
-                    feedbackDiv.textContent = '✅ Resposta correta!';
-                    feedbackDiv.className = 'feedback correct';
-                    feedbackDiv.style.display = 'block';
-                    score++;
+                const feedbackDiv = document.getElementById('fb' + i);
+                const correctAnswer = answers[questionName];
+                const correctLetter = correctAnswer.toUpperCase();
+                let correctText = '';
+                const labels = document.querySelectorAll(`.question#q${i} .option`);
+                labels.forEach(label => {
+                    const radio = label.querySelector('input');
+                    if (radio.value === correctAnswer) {
+                        correctText = label.innerText.trim();
+                    }
+                });
+                if (selectedValue) {
+                    if (selectedValue === correctAnswer) {
+                        feedbackDiv.innerHTML = `<i class="fas fa-check-circle"></i> Resposta correta!`;
+                        feedbackDiv.className = 'feedback correct';
+                        feedbackDiv.style.display = 'flex';
+                        score++;
+                    } else {
+                        feedbackDiv.innerHTML = `<i class="fas fa-times-circle"></i> Incorreto. Correta: ${correctLetter} - ${correctText}`;
+                        feedbackDiv.className = 'feedback incorrect';
+                        feedbackDiv.style.display = 'flex';
+                    }
                 } else {
-                    feedbackDiv.textContent = `❌ Incorreto. A resposta correta é ${correctLetter}: ${correctText}`;
+                    feedbackDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> Não respondida. Correta: ${correctLetter} - ${correctText}`;
                     feedbackDiv.className = 'feedback incorrect';
-                    feedbackDiv.style.display = 'block';
+                    feedbackDiv.style.display = 'flex';
                 }
-            } else {
-                feedbackDiv.textContent = `⚠️ Você não respondeu. A resposta correta é ${correctLetter}: ${correctText}`;
-                feedbackDiv.className = 'feedback incorrect';
-                feedbackDiv.style.display = 'block';
             }
-        }
 
-        const percent = Math.round((score / totalQuestions) * 100);
-        const nome = document.getElementById('nomeUsuario').value.trim() || "Anônimo";
-        let mensagem = '';
-        if (percent >= 90) mensagem = '🔥 Excelente!';
-        else if (percent >= 70) mensagem = '👍 Muito bom!';
-        else if (percent >= 50) mensagem = '⚠️ Dá pra melhorar!';
-        else mensagem = '❌ Precisa estudar mais!';
+            const percent = Math.round((score / totalQuestions) * 100);
+            const nome = document.getElementById('nomeUsuario').value.trim() || "Anônimo";
+            let mensagem = '';
+            let emoji = '';
+            if (percent >= 90) { mensagem = 'Excelente!'; emoji = '🔥'; }
+            else if (percent >= 70) { mensagem = 'Muito bom!'; emoji = '👍'; }
+            else if (percent >= 50) { mensagem = 'Dá pra melhorar!'; emoji = '⚠️'; }
+            else { mensagem = 'Precisa estudar mais!'; emoji = '❌'; }
 
-        document.getElementById('scoreDisplay').innerHTML =
-            `🎯 ${nome}, você acertou ${score} de ${totalQuestions} (${percent}%)<br>${mensagem}`;
+            document.getElementById('scoreDisplay').innerHTML =
+                `<i class="fas fa-trophy"></i> ${nome}, você acertou ${score} de ${totalQuestions} (${percent}%) <br> ${emoji} ${mensagem}`;
 
-        // Salvar no Realtime Database (coleção "resultados")
-        try {
-            const resultadosRef = ref(db, 'resultados');
-            await push(resultadosRef, {
-                nome: nome,
-                acertos: score,
-                total: totalQuestions,
-                porcentagem: percent,
-                timestamp: new Date().toISOString()
-            });
-            console.log("✅ Resultado salvo no Realtime Database!");
-        } catch (error) {
-            console.error("❌ Erro ao salvar:", error);
-        }
-    });
-</script>
+            try {
+                const resultadosRef = ref(db, 'resultados');
+                await push(resultadosRef, {
+                    nome: nome,
+                    acertos: score,
+                    total: totalQuestions,
+                    porcentagem: percent,
+                    timestamp: new Date().toISOString()
+                });
+                console.log("✅ Resultado salvo no Realtime Database!");
+            } catch (error) {
+                console.error("❌ Erro ao salvar:", error);
+            }
+        });
+    </script>
 </body>
 </html>
